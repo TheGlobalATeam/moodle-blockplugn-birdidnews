@@ -1,8 +1,19 @@
 <?php
 
+require_once($CFG->libdir . '/pagelib.php');
+
 class block_birdidnews extends block_base {
+
+	private $jsWorkerLoaded = false;
+
     public function init() {
+		GLOBAL $PAGE;
+
         $this->title = get_string('birdidnews', 'block_birdidnews');
+
+
+
+
     }
 
 	public function applicable_formats() {
@@ -11,7 +22,16 @@ class block_birdidnews extends block_base {
 
 	public function get_content() {
 
-        global $CFG, $OUTPUT, $USER, $DB;
+        global $CFG, $OUTPUT, $USER, $DB, $PAGE;
+
+		//loading js file, while preventing moodle catching. probably a better way somewhere...
+		if(!$this->jsWorkerLoaded){
+			$this->jsWorkerLoaded = true;
+			$PAGE->requires->js('/blocks/birdidnews/main.js?'.rand());
+		}
+
+		//not working way
+		//$this->page->require->requiresjs('/blocks/birdidnews/main.js');
 
         if ($this->content !== null) {
           return $this->content;
