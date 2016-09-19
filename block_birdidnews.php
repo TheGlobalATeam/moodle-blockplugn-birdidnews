@@ -55,7 +55,7 @@ class block_birdidnews extends block_base {
 		$this->content->text .= ' <a href="'.$newsURL.'">URL to news</a>';
 
 
-        $this->content->footer = 'Footer here...';
+        $this->content->footer = 'The end of my block';
 
         return $this->content;
 
